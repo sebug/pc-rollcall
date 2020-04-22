@@ -28,7 +28,6 @@ class ParticipantDays {
     }
 
     static createFromNode(node) {
-	console.log(node);
 	let result = new ParticipantDays();
 	const basicMappings = [
 	    [ 'employeeID', 'EMPLID' ],
@@ -46,6 +45,32 @@ class ParticipantDays {
 	    [ 'homePhone', 'ZS_PHONE_HOME' ],
 	    [ 'email', 'ZS_EMAIL_ADDR' ],
 	    [ 'comments', 'ZS_DL_BEMERKUNG' ]
+	];
+	for (let m of basicMappings) {
+	    const v = node.querySelector(m[1]);
+	    if (v) {
+		result[m[0]] = v.innerHTML || null;
+	    } else {
+		result[m[0]] = null;
+	    }
+	}
+	const effectiveDateNodes = Array.from(node.querySelectorAll('ZS_TEILN_DT_EFF'));
+	result.dates = effectiveDateNodes.map(EffectiveDate.createFromNode);
+	
+	return result;
+    }
+}
+
+class EffectiveDate {
+    constructor() {
+    }
+
+    static createFromNode(node) {
+	let result = new ParticipantDays();
+	const basicMappings = [
+	    [ 'date', 'ZS_TN_DATUM' ],
+	    [ 'counted', 'ZS_ANRECH_YN' ],
+	    [ 'reasonForAbsence', 'ZS_ABWGRUND_CD' ]
 	];
 	for (let m of basicMappings) {
 	    const v = node.querySelector(m[1]);
