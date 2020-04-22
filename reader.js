@@ -40,7 +40,10 @@ class ParticipantDays {
 	    [ 'participantToDate', 'ZS_TN_BIS_DT' ],
 	    [ 'daysOfService', 'ZS_DIENSTTAGE' ],
 	    [ 'additionalTraining', 'ZS_ZUSAUSBG' ],
-	    [ 'mobile', 'ZS_MOBILE_HOME' ],
+	    [ 'mobilePhone', 'ZS_MOBILE_HOME' ],
+	    [ 'businessPhone', 'ZS_PHONE_BUSN' ],
+	    [ 'emergencyPhone', 'ZS_PHONE_EMERG' ],
+	    [ 'homePhone', 'ZS_PHONE_HOME' ],
 	    [ 'email', 'ZS_EMAIL_ADDR' ],
 	    [ 'comments', 'ZS_DL_BEMERKUNG' ]
 	];
