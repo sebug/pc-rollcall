@@ -50,7 +50,9 @@ class ParticipantDays {
 	for (let m of basicMappings) {
 	    const v = node.querySelector(m[1]);
 	    if (v) {
-		result[m[0]] = v.innerHTML;
+		result[m[0]] = v.innerHTML || null;
+	    } else {
+		result[m[0]] = null;
 	    }
 	}
 	return result;
