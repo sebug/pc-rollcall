@@ -7,9 +7,15 @@ fileInput.addEventListener('change', () => {
 	const firstFile = fileInput.files[0];
 	const reader = new FileReader();
 	reader.onload = (e) => {
-	    console.log(e.target.result);
+	    const exportContent = readPISAExport(e.target.result);
 	};
 
 	reader.readAsText(firstFile);
     }
 });
+
+const readPISAExport = (txt) => {
+    const oParser = new DOMParser();
+    const oDOM = oParser.parseFromString(txt, 'application/xml');
+    console.log(oDOM);
+};
