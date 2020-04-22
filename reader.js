@@ -7,7 +7,21 @@ fileInput.addEventListener('change', () => {
 	const firstFile = fileInput.files[0];
 	const reader = new FileReader();
 	reader.onload = (e) => {
-	    const exportContent = readPISAExport(e.target.result);
+	    const participants = readPISAExport(e.target.result);
+	    const tableNode = document.querySelector('.participants table');
+	    const tableBody = tableNode.querySelector('tbody');
+	    tableBody.innerHTML = ''; // clear out old content
+	    const template = document.querySelector('#participant-row');
+	    for (let participant of participants) {
+		const participantRow = template.content.cloneNode('true');
+		const td = participantRow.querySelectorAll('td');
+		td[0].textContent = participant.email || '';
+		td[1].textContent = participant.participantFromDate || '';
+		td[2].textContent = participant.participantToDate || '';
+		td[3].textContent = participant.daysOfService || '0';
+
+		tableBody.appendChild(participantRow);
+	    }
 	};
 
 	reader.readAsText(firstFile);
@@ -19,7 +33,6 @@ const readPISAExport = (txt) => {
     const oDOM = oParser.parseFromString(txt, 'application/xml');
     const daysNodes = Array.from(oDOM.querySelectorAll('PISA_TAGE_ADZS'));
     const result = daysNodes.map(ParticipantDays.createFromNode);
-    console.log(result);
     return result;
 };
 
