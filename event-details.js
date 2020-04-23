@@ -25,8 +25,21 @@ class EventDetails extends HTMLElement {
 	wrapper.appendChild(this.heading);
     }
 
+    static get observedAttributes() {
+	return ['eventdescription'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+	console.log(name);
+	console.log(oldValue);
+	console.log(newValue);
+
+	if (name === 'eventdescription') {
+	    this.heading.textContent = newValue;
+	}
+    }
+
     connectedCallback() {
-	this.heading.textContent = this.getAttribute('eventdescription');
     }
 }
 
