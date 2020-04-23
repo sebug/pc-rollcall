@@ -18,6 +18,8 @@ fileInput.addEventListener('change', () => {
 		const eventDetails = document.createElement('event-details');
 		eventDetails.setAttribute('eventdescription', courseInfo.description);
 
+		eventDetails.bindCourseInfo(courseInfo);
+
 		const theMain = document.querySelector('main');
 		theMain.appendChild(eventDetails);
 	    }
@@ -58,9 +60,6 @@ const readDaysInOut = (oDOM) => {
 const readCourseInfo = (oDOM) => {
     const eventDescriptionNode = oDOM.querySelector('ZS_ANLASS_O');
     const result = EventDescription.createFromNode(eventDescriptionNode);
-    console.log(oDOM);
-
-    console.log(result);
 
     return result;
 };

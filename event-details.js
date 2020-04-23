@@ -23,6 +23,8 @@ class EventDetails extends HTMLElement {
 	shadow.appendChild(style);
 	shadow.appendChild(wrapper);
 	wrapper.appendChild(this.heading);
+
+	this.bindCourseInfo = this.bindCourseInfo.bind(this);
     }
 
     static get observedAttributes() {
@@ -30,13 +32,13 @@ class EventDetails extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-	console.log(name);
-	console.log(oldValue);
-	console.log(newValue);
-
 	if (name === 'eventdescription') {
 	    this.heading.textContent = newValue;
 	}
+    }
+
+    bindCourseInfo(courseInfo) {
+	console.log(courseInfo);
     }
 
     connectedCallback() {
