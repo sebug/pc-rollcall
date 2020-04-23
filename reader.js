@@ -16,8 +16,6 @@ fileInput.addEventListener('change', () => {
 		const courseInfo = readCourseInfo(oDOM);
 
 		const eventDetails = document.createElement('event-details');
-		eventDetails.setAttribute('eventdescription', courseInfo.description);
-
 		eventDetails.bindCourseInfo(courseInfo);
 
 		const theMain = document.querySelector('main');
