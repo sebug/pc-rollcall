@@ -50,6 +50,28 @@ const readCourseInfo = (oDOM) => {
     return result;
 };
 
+class EventDate {
+    constructor() {
+    }
+
+    static createFromNode(node) {
+	let result = new EventDate();
+	const basicMappings = [
+	    [ 'date', 'ZS_ANL_DATUM' ]
+	];
+	for (let m of basicMappings) {
+	    const v = node.querySelector(m[1]);
+	    if (v) {
+		result[m[0]] = v.innerHTML || null;
+	    } else {
+		result[m[0]] = null;
+	    }
+	}
+	
+	return result;
+    }
+}
+
 class EventDescription {
     constructor() {
     }
@@ -104,6 +126,9 @@ class EventDescription {
 		result[m[0]] = null;
 	    }
 	}
+
+	const eventNodes = Array.from(node.querySelectorAll('ZS_ANL_DT_EFF'));
+	result.dates = eventNodes.map(EventDate.createFromNode);
 	
 	return result;
     }
