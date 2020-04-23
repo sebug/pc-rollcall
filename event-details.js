@@ -32,6 +32,8 @@ class EventDetails extends HTMLElement {
 
 	this.heading.textContent = eventDescription;
 
+	this.convocationPlace = document.createElement('convocation-place');
+
 	const style = document.createElement('style');
 	style.textContent = 'h2 {' +
 	    'color: green;' +
@@ -83,6 +85,8 @@ class EventDetails extends HTMLElement {
 	if (courseInfo.eventToDate) {
 	    this.setAttribute('todate', courseInfo.eventToDate);
 	}
+
+	this.convocationPlace.bindConvocationPlace(courseInfo);
     }
 
     connectedCallback() {
