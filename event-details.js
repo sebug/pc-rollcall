@@ -1,5 +1,3 @@
-console.log('component description here');
-
 class EventDetails extends HTMLElement {
     constructor() {
 	super();
