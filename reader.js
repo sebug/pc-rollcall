@@ -214,6 +214,35 @@ class Participant {
 	}
 	const effectiveDateNodes = Array.from(node.querySelectorAll('ZS_TEILN_DT_EFF'));
 	result.dates = effectiveDateNodes.map(EffectiveDate.createFromNode);
+
+	const additionalTrainingNodes = Array.from(node.querySelectorAll('ZS_ZUSAUSB'));
+	result.additionalTraining = additionalTrainingNodes.map(AdditionalTraining.createFromNode);
+	
+	return result;
+    }
+}
+
+class AdditionalTraining {
+    constructor() {
+    }
+
+    static createFromNode(node) {
+	let result = new AdditionalTraining();
+	const basicMappings = [
+	    [ 'training', 'ZS_ZUSAUSB_CD' ],
+	    [ 'trainingDescription', 'ZS_ZUSAUSB_DESCR' ],
+	    [ 'specialist', 'ZS_SPEZIALIST_YN' ],
+	    [ 'date', 'ZS_ABSCHLUSS_DT' ],
+	    [ 'expirationDate', 'ZS_ABLAUF_DT' ]
+	];
+	for (let m of basicMappings) {
+	    const v = node.querySelector(m[1]);
+	    if (v) {
+		result[m[0]] = v.innerHTML || null;
+	    } else {
+		result[m[0]] = null;
+	    }
+	}
 	
 	return result;
     }
