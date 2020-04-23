@@ -14,7 +14,12 @@ fileInput.addEventListener('change', () => {
 		displayParticipants(participants);
 	    } else {
 		const courseInfo = readCourseInfo(oDOM);
-		displayParticipants(courseInfo.participants);
+
+		const eventDetails = document.createElement('event-details');
+		eventDetails.setAttribute('eventdescription', courseInfo.description);
+
+		const theMain = document.querySelector('main');
+		theMain.appendChild(eventDetails);
 	    }
 	};
 
