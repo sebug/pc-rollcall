@@ -18,7 +18,17 @@ class EventDetails extends HTMLElement {
 	this.eventNumber.setAttribute('class', 'event-number');
 	this.eventNumber.textContent = this.getAttribute('eventnumber');
 
+	this.fromDate = document.createElement('span');
+	this.fromDate.setAttribute('class', 'from-date');
+	this.fromDate.textContent = this.getAttribute('fromdate');
+
+	this.toDate = document.createElement('span');
+	this.toDate.setAttribute('class', 'to-date');
+	this.toDate.textContent = this.getAttribute('todate');
+
 	this.introParagraph.appendChild(this.eventNumber);
+	this.introParagraph.appendChild(this.fromDate);
+	this.introParagraph.appendChild(this.toDate);
 
 	const eventDescription = this.getAttribute('eventdescription');
 
@@ -38,7 +48,7 @@ class EventDetails extends HTMLElement {
     }
 
     static get observedAttributes() {
-	return ['eventdescription', 'eventnumber'];
+	return ['eventdescription', 'eventnumber', 'fromdate', 'todate'];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -46,6 +56,18 @@ class EventDetails extends HTMLElement {
 	    this.heading.textContent = newValue;
 	} else if (name === 'eventnumber') {
 	    this.eventNumber.textContent = newValue;
+	} else if (name === 'fromdate') {
+	    if (newValue) {
+		this.fromDate.textContent = ' du ' + newValue;
+	    } else {
+		this.fromDate.textContent = '';
+	    }
+	} else if (name === 'todate') {
+	    if (newValue) {
+		this.toDate.textContent = ' au ' + newValue;
+	    } else {
+		this.toDate.textContent = '';
+	    }
 	}
     }
 
@@ -56,6 +78,12 @@ class EventDetails extends HTMLElement {
 	}
 	if (courseInfo.eventNumber) {
 	    this.setAttribute('eventnumber', courseInfo.eventNumber);
+	}
+	if (courseInfo.eventFromDate) {
+	    this.setAttribute('fromdate', courseInfo.eventFromDate);
+	}
+	if (courseInfo.eventToDate) {
+	    this.setAttribute('todate', courseInfo.eventToDate);
 	}
     }
 
