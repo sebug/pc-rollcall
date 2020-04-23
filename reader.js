@@ -23,12 +23,15 @@ fileInput.addEventListener('change', () => {
 });
 
 const displayParticipants = (participants) => {
-    const tableNode = document.querySelector('.participants table');
+    const participantsSection = document.querySelector('section.participants');
+    const participantsTemplate = document.querySelector('#participants-section');
+    const sectionNode = participantsTemplate.content.cloneNode(true);
+    const tableNode = sectionNode.querySelector('table');
     const tableBody = tableNode.querySelector('tbody');
     tableBody.innerHTML = ''; // clear out old content
     const template = document.querySelector('#participant-row');
     for (let participant of participants) {
-	const participantRow = template.content.cloneNode('true');
+	const participantRow = template.content.cloneNode(true);
 	const td = participantRow.querySelectorAll('td');
 	td[0].textContent = participant.email || '';
 	td[1].textContent = participant.participantFromDate || '';
@@ -37,6 +40,8 @@ const displayParticipants = (participants) => {
 
 	tableBody.appendChild(participantRow);
     }
+
+    participantsSection.appendChild(sectionNode);
 };
 
 const readDaysInOut = (oDOM) => {
