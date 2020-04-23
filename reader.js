@@ -13,7 +13,8 @@ fileInput.addEventListener('change', () => {
 		const participants = readDaysInOut(oDOM);
 		displayParticipants(participants);
 	    } else {
-		readCourseInfo(oDOM);
+		const courseInfo = readCourseInfo(oDOM);
+		displayParticipants(courseInfo.participants);
 	    }
 	};
 
